@@ -1,0 +1,2127 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index, follow">
+  <title>Ремонт Беру — Дмитрий Слушник | Ремонт и строительство под ключ в СПб</title>
+  <meta name="description" content="Комплексный ремонт квартир и строительство домов под ключ в Санкт-Петербурге. Дмитрий Слушник лично управляет каждым объектом. Фиксированная смета. Работаем удалённо.">
+  <meta property="og:title" content="Ремонт Беру — Дмитрий Слушник | Ремонт и строительство под ключ в СПб">
+  <meta property="og:description" content="Комплексный ремонт квартир и строительство домов под ключ в Санкт-Петербурге. Дмитрий Слушник лично управляет каждым объектом.">
+  <meta property="og:image" content="https://picsum.photos/seed/remont-beru-hero/1200/630">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* ─── Reset & Base ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: 'Manrope', sans-serif;
+      background-color: #F5F1EC;
+      color: #1C1C1E;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+    button { cursor: pointer; font-family: inherit; border: none; background: none; }
+
+    /* ─── CSS Variables ─── */
+    :root {
+      --bg: #F5F1EC;
+      --dark: #0E0E0D;
+      --red: #C8232B;
+      --red-hover: #A81A21;
+      --red-glow: rgba(200, 35, 43, 0.12);
+      --text: #1C1C1E;
+      --text-muted: #6B6560;
+      --card-bg: #EDE8E2;
+      --border: #DDD6CC;
+      --radius: 16px;
+      --radius-sm: 10px;
+      --radius-pill: 100px;
+    }
+
+    /* ─── Scroll Progress Bar ─── */
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      width: 0%;
+      background: var(--red);
+      z-index: 9999;
+      transition: width 0.08s linear;
+    }
+
+    /* ─── Animations ─── */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Clip-path reveal for headings */
+    @keyframes clipReveal {
+      from { clip-path: inset(0 100% 0 0); opacity: 0; }
+      to   { clip-path: inset(0 0% 0 0); opacity: 1; }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.08s; }
+    .reveal-delay-2 { transition-delay: 0.16s; }
+    .reveal-delay-3 { transition-delay: 0.24s; }
+    .reveal-delay-4 { transition-delay: 0.32s; }
+    .reveal-delay-5 { transition-delay: 0.40s; }
+
+    /* Heading clip-path reveal */
+    .reveal-heading {
+      overflow: hidden;
+    }
+    .reveal-heading h2,
+    .reveal-heading h3 {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal-heading.visible h2,
+    .reveal-heading.visible h3 {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal, .reveal.visible,
+      .reveal-heading h2, .reveal-heading.visible h2 {
+        opacity: 1; transform: none; transition: none;
+      }
+    }
+
+    /* ─── Marquee ─── */
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ─── Layout Helpers ─── */
+    .container {
+      width: 100%;
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ─── Navigation ─── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--dark);
+      transition: box-shadow 0.3s ease;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .nav.scrolled {
+      box-shadow: 0 2px 32px rgba(0,0,0,0.4);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+      gap: 24px;
+    }
+    .nav-logo {
+      font-size: 18px;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.02em;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .nav-logo span { color: var(--red); }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+    }
+    .nav-links a {
+      font-size: 15px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.55);
+      transition: color 0.2s;
+      white-space: nowrap;
+    }
+    .nav-links a:hover { color: #fff; }
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--red);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 10px 20px;
+      border-radius: var(--radius-pill);
+      transition: background 0.2s, transform 0.15s;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .nav-cta:hover { background: var(--red-hover); transform: scale(1.02); }
+    .nav-cta svg { width: 16px; height: 16px; }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      padding: 4px;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: #fff;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      gap: 0;
+      background: var(--dark);
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 16px 24px 24px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-size: 17px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.8);
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .mobile-menu a:last-child { border-bottom: none; }
+    .mobile-menu .mobile-cta {
+      margin-top: 16px;
+      display: block;
+      text-align: center;
+      background: var(--red);
+      color: #fff;
+      font-size: 16px;
+      font-weight: 700;
+      padding: 16px;
+      border-radius: var(--radius-pill);
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      background: var(--dark);
+      padding: 88px 0 104px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Subtle grid texture */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 64px 64px;
+      pointer-events: none;
+    }
+
+    /* Red glow top-right */
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: -120px;
+      right: -80px;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(200,35,43,0.14) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 72px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--red);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 28px;
+      height: 2px;
+      background: var(--red);
+      border-radius: 2px;
+    }
+    .hero h1 {
+      font-size: clamp(40px, 5vw, 68px);
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+      margin-bottom: 28px;
+      max-width: 580px;
+    }
+    .hero h1 em {
+      font-style: normal;
+      color: var(--red);
+    }
+    .hero-sub {
+      font-size: 17px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.6;
+      margin-bottom: 44px;
+      max-width: 480px;
+    }
+    .hero-sub strong { color: rgba(255,255,255,0.9); font-weight: 600; }
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 60px;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--red);
+      color: #fff;
+      font-size: 16px;
+      font-weight: 700;
+      padding: 16px 28px;
+      border-radius: var(--radius-pill);
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      min-height: 52px;
+      white-space: nowrap;
+    }
+    .btn-primary:hover {
+      background: var(--red-hover);
+      transform: scale(1.02);
+      box-shadow: 0 8px 32px rgba(200,35,43,0.35);
+    }
+    .btn-primary:active { transform: scale(0.98); }
+
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: rgba(255,255,255,0.8);
+      font-size: 16px;
+      font-weight: 600;
+      padding: 15px 28px;
+      border-radius: var(--radius-pill);
+      border: 1.5px solid rgba(255,255,255,0.2);
+      transition: border-color 0.2s, color 0.2s, transform 0.15s;
+      min-height: 52px;
+      white-space: nowrap;
+    }
+    .btn-outline:hover { border-color: rgba(255,255,255,0.6); color: #fff; transform: scale(1.02); }
+    .btn-outline:active { transform: scale(0.98); }
+
+    /* Hero stats */
+    .hero-stats {
+      display: flex;
+      gap: 36px;
+    }
+    .hero-stat {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .hero-stat-number {
+      font-size: 30px;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.04em;
+      line-height: 1;
+    }
+    .hero-stat-label {
+      font-size: 12px;
+      color: rgba(255,255,255,0.4);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .hero-stat-divider {
+      width: 1px;
+      background: rgba(255,255,255,0.1);
+      align-self: stretch;
+    }
+
+    /* Hero image */
+    .hero-image-wrap {
+      position: relative;
+    }
+    .hero-photo {
+      width: 100%;
+      aspect-ratio: 3/4;
+      background: #1C1C1A;
+      border-radius: var(--radius);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      border: 1px solid rgba(200,35,43,0.25);
+      box-shadow:
+        0 0 0 6px rgba(200,35,43,0.06),
+        0 32px 80px rgba(0,0,0,0.5);
+    }
+    .hero-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      will-change: transform;
+    }
+
+    /* Red accent bar on photo */
+    .hero-photo::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--red);
+      z-index: 2;
+    }
+
+    .hero-photo-badge {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      background: rgba(14,14,13,0.88);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius-sm);
+      padding: 12px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      z-index: 3;
+    }
+    .hero-photo-badge strong {
+      font-size: 14px;
+      font-weight: 800;
+      color: #fff;
+    }
+    .hero-photo-badge span {
+      font-size: 11px;
+      color: rgba(255,255,255,0.45);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Floating reviews badge */
+    .hero-reviews-badge {
+      position: absolute;
+      top: 24px;
+      right: -16px;
+      background: rgba(14,14,13,0.88);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius-sm);
+      padding: 10px 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      z-index: 3;
+    }
+    .hero-reviews-badge .stars {
+      display: flex;
+      gap: 2px;
+      color: #F59E0B;
+      font-size: 12px;
+    }
+    .hero-reviews-badge .label {
+      font-size: 11px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.6);
+      white-space: nowrap;
+    }
+
+    /* ─── TRUST TICKER (was social-strip) ─── */
+    .trust-strip {
+      background: #161615;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      height: 56px;
+      overflow: hidden;
+      position: relative;
+    }
+    .trust-strip::before,
+    .trust-strip::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 80px;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .trust-strip::before {
+      left: 0;
+      background: linear-gradient(to right, #161615, transparent);
+    }
+    .trust-strip::after {
+      right: 0;
+      background: linear-gradient(to left, #161615, transparent);
+    }
+    .marquee-wrapper {
+      overflow: hidden;
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
+    .marquee-track {
+      display: flex;
+      align-items: center;
+      width: max-content;
+      animation: marquee 40s linear infinite;
+    }
+    .marquee-track:hover {
+      animation-play-state: paused;
+    }
+    .marquee-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0 36px;
+      font-size: 13px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.6);
+      white-space: nowrap;
+    }
+    .marquee-item svg {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      opacity: 0.7;
+    }
+    .marquee-dot {
+      width: 4px;
+      height: 4px;
+      background: var(--red);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .marquee-item strong {
+      color: rgba(255,255,255,0.9);
+    }
+
+    /* ─── SECTION SHARED ─── */
+    .section-header {
+      margin-bottom: 56px;
+      position: relative;
+    }
+    .section-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--red);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .section-eyebrow::before {
+      content: '';
+      display: block;
+      width: 20px;
+      height: 2px;
+      background: var(--red);
+      border-radius: 2px;
+    }
+    .section-header h2 {
+      font-size: clamp(30px, 3.5vw, 46px);
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: -0.035em;
+      line-height: 1.08;
+      margin-bottom: 16px;
+    }
+    .section-header p {
+      font-size: 17px;
+      color: var(--text-muted);
+      max-width: 520px;
+    }
+
+    /* ─── SERVICES ─── */
+    .services {
+      padding: 104px 0;
+      background: var(--bg);
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .service-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 44px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                  box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                  border-color 0.3s;
+      will-change: transform;
+      cursor: default;
+      position: relative;
+      overflow: hidden;
+    }
+    .service-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--red);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .service-card:hover::after {
+      transform: scaleX(1);
+    }
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 24px 64px rgba(0,0,0,0.1);
+      border-color: rgba(200,35,43,0.2);
+    }
+    .service-icon {
+      width: 56px;
+      height: 56px;
+      background: var(--red);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      position: relative;
+    }
+    .service-icon::after {
+      content: '';
+      position: absolute;
+      inset: -6px;
+      background: var(--red-glow);
+      border-radius: calc(var(--radius-sm) + 4px);
+    }
+    .service-icon svg {
+      width: 26px;
+      height: 26px;
+      stroke: #fff;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      position: relative;
+      z-index: 1;
+    }
+    .service-card h3 {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+    }
+    .service-card p {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+    .service-list {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+    .service-list li {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text);
+      padding-left: 18px;
+      position: relative;
+    }
+    .service-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 6px;
+      height: 6px;
+      background: var(--red);
+      border-radius: 50%;
+    }
+    .service-price {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: -0.03em;
+    }
+    .service-price span {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+
+    /* ─── WHY DMITRY ─── */
+    .why-section {
+      background: var(--dark);
+      padding: 104px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .why-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 64px 64px;
+      pointer-events: none;
+    }
+    .why-section .section-header h2 { color: #fff; }
+    .why-section .section-header p { color: rgba(255,255,255,0.45); }
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-top: 56px;
+      position: relative;
+      z-index: 1;
+    }
+    .why-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius);
+      padding: 32px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                  background 0.3s, border-color 0.3s;
+      will-change: transform;
+      cursor: default;
+    }
+    .why-card:hover {
+      background: rgba(255,255,255,0.07);
+      border-color: rgba(200,35,43,0.3);
+    }
+    .why-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius-sm);
+      background: rgba(200,35,43,0.12);
+      border: 1px solid rgba(200,35,43,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .why-icon svg {
+      width: 22px;
+      height: 22px;
+      stroke: var(--red);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .why-card h4 {
+      font-size: 17px;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.3;
+    }
+    .why-card p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.65;
+    }
+
+    /* ─── PORTFOLIO ─── */
+    .portfolio {
+      padding: 104px 0;
+      background: var(--bg);
+    }
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 56px;
+    }
+    .portfolio-card {
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--card-bg);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                  box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+      position: relative;
+    }
+    .portfolio-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 24px 72px rgba(0,0,0,0.15);
+    }
+    .portfolio-img {
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      background: #D5CEBE;
+      position: relative;
+    }
+    .portfolio-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .portfolio-card:hover .portfolio-img img {
+      transform: scale(1.06);
+    }
+
+    /* Dark overlay on hover */
+    .portfolio-img::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(14,14,13,0.8) 0%,
+        rgba(200,35,43,0.3) 60%,
+        transparent 100%
+      );
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+    .portfolio-card:hover .portfolio-img::after {
+      opacity: 1;
+    }
+
+    /* "Подробнее" label on hover */
+    .portfolio-hover-label {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 20px 20px 0;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.4s, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .portfolio-hover-label::after {
+      content: '→';
+    }
+    .portfolio-card:hover .portfolio-hover-label {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .portfolio-info {
+      padding: 20px 24px 24px;
+    }
+    .portfolio-tag {
+      display: inline-block;
+      background: rgba(200,35,43,0.1);
+      color: var(--red);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      margin-bottom: 10px;
+    }
+    .portfolio-info h4 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+    .portfolio-meta {
+      font-size: 13px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* ─── REVIEWS ─── */
+    .reviews {
+      background: #161615;
+      padding: 104px 0;
+    }
+    .reviews .section-header h2 { color: #fff; }
+    .reviews .section-header p { color: rgba(255,255,255,0.45); }
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 56px;
+    }
+    .review-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius);
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      transition: background 0.3s, border-color 0.3s, transform 0.4s cubic-bezier(0.16,1,0.3,1);
+      cursor: default;
+      will-change: transform;
+    }
+    .review-card:hover {
+      background: rgba(255,255,255,0.07);
+      border-color: rgba(200,35,43,0.25);
+    }
+    .review-stars {
+      display: flex;
+      gap: 4px;
+    }
+    .review-stars span {
+      font-size: 16px;
+      color: #F59E0B;
+    }
+    .review-text {
+      font-size: 15px;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.7;
+      font-weight: 400;
+    }
+    .review-author {
+      margin-top: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .review-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+    }
+    .review-source {
+      font-size: 12px;
+      color: rgba(255,255,255,0.35);
+      font-weight: 500;
+    }
+    .reviews-cta {
+      margin-top: 48px;
+      text-align: center;
+    }
+    .btn-outline-white {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: #fff;
+      font-size: 15px;
+      font-weight: 600;
+      padding: 14px 28px;
+      border-radius: var(--radius-pill);
+      border: 1.5px solid rgba(255,255,255,0.2);
+      transition: border-color 0.2s, transform 0.15s;
+      min-height: 50px;
+    }
+    .btn-outline-white:hover { border-color: rgba(255,255,255,0.6); transform: scale(1.02); }
+
+    /* ─── CALCULATOR ─── */
+    .calculator {
+      background: var(--red);
+      padding: 104px 0;
+      overflow: hidden;
+      position: relative;
+    }
+    .calculator::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+    }
+    .calc-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+      position: relative;
+      z-index: 1;
+    }
+    .calc-left h2 {
+      font-size: clamp(28px, 3.5vw, 44px);
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.04em;
+      line-height: 1.05;
+      margin-bottom: 16px;
+    }
+    .calc-left p {
+      font-size: 16px;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.65;
+    }
+    .calc-form {
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: var(--radius);
+      padding: 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+    .calc-field label {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 12px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .calc-options {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .calc-option {
+      flex: 1;
+      min-width: 80px;
+      padding: 10px 8px;
+      background: rgba(255,255,255,0.12);
+      border: 1.5px solid rgba(255,255,255,0.2);
+      border-radius: var(--radius-sm);
+      color: rgba(255,255,255,0.8);
+      font-size: 14px;
+      font-weight: 600;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .calc-option:hover { background: rgba(255,255,255,0.22); }
+    .calc-option.active {
+      background: #fff;
+      border-color: #fff;
+      color: var(--red);
+    }
+    .calc-slider-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .calc-slider-value {
+      font-size: 28px;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.03em;
+    }
+    .calc-slider-value span { font-size: 15px; font-weight: 500; }
+    input[type="range"] {
+      width: 100%;
+      height: 4px;
+      border-radius: 4px;
+      appearance: none;
+      -webkit-appearance: none;
+      background: rgba(255,255,255,0.3);
+      outline: none;
+    }
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #fff;
+      cursor: pointer;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+    }
+    .calc-result {
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: var(--radius-sm);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .calc-result-label {
+      font-size: 12px;
+      color: rgba(255,255,255,0.65);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .calc-result-value {
+      font-size: 30px;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.04em;
+    }
+    .calc-phone-wrap {
+      display: flex;
+      gap: 10px;
+    }
+    .calc-input {
+      flex: 1;
+      padding: 14px 16px;
+      border-radius: var(--radius-sm);
+      border: 1.5px solid rgba(255,255,255,0.25);
+      background: rgba(255,255,255,0.12);
+      color: #fff;
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: 500;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .calc-input::placeholder { color: rgba(255,255,255,0.45); }
+    .calc-input:focus { border-color: rgba(255,255,255,0.65); }
+    .btn-calc-submit {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--dark);
+      color: #fff;
+      font-size: 15px;
+      font-weight: 700;
+      padding: 14px 20px;
+      border-radius: var(--radius-sm);
+      border: none;
+      cursor: pointer;
+      transition: transform 0.15s, background 0.2s;
+      white-space: nowrap;
+    }
+    .btn-calc-submit:hover { background: #222; transform: scale(1.02); }
+    .btn-calc-submit:active { transform: scale(0.98); }
+
+    /* ─── CONTACTS ─── */
+    .contacts {
+      padding: 104px 0;
+      background: var(--bg);
+    }
+    .contacts-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+      margin-top: 56px;
+    }
+    .contacts-left h3 {
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: -0.03em;
+      margin-bottom: 32px;
+    }
+    .contacts-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .contacts-item-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-sm);
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .contacts-item-icon svg {
+      width: 20px;
+      height: 20px;
+      stroke: var(--red);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .contacts-item-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .contacts-item-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .contacts-item-value {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .contacts-item-value a { transition: color 0.2s; }
+    .contacts-item-value a:hover { color: var(--red); }
+    .contacts-wa-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #25D366;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 700;
+      padding: 14px 28px;
+      border-radius: var(--radius-pill);
+      margin-top: 8px;
+      transition: background 0.2s, transform 0.15s;
+      min-height: 52px;
+    }
+    .contacts-wa-btn:hover { background: #1ebe5a; transform: scale(1.02); }
+    .contacts-wa-btn svg { width: 20px; height: 20px; }
+    .contacts-right h4 {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 24px;
+    }
+    .socials-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .social-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 14px 16px;
+      transition: background 0.2s, transform 0.15s, border-color 0.2s, box-shadow 0.2s;
+    }
+    .social-link:hover {
+      border-color: rgba(200,35,43,0.3);
+      transform: scale(1.02);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    }
+    .social-link svg { width: 20px; height: 20px; flex-shrink: 0; }
+    .social-link span { font-size: 14px; font-weight: 600; color: var(--text); }
+    .contacts-hours {
+      margin-top: 28px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+    }
+    .contacts-hours h5 {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .hours-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .hours-row:last-child { border-bottom: none; }
+    .hours-day { color: var(--text-muted); font-weight: 500; }
+    .hours-time { color: var(--text); font-weight: 700; }
+
+    /* ─── MAP ─── */
+    .map-section {
+      padding: 0 0 104px;
+      background: var(--bg);
+    }
+    .map-frame {
+      position: relative;
+      width: 100%;
+      height: 480px;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: 0 24px 64px rgba(14,14,13,0.10);
+      filter: grayscale(0.35) contrast(1.05);
+      transition: filter 0.4s ease;
+    }
+    .map-frame:hover { filter: grayscale(0) contrast(1); }
+    .map-frame iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+    .map-card {
+      position: absolute;
+      top: 24px;
+      left: 24px;
+      z-index: 5;
+      background: var(--dark);
+      color: #fff;
+      border-radius: var(--radius-sm);
+      padding: 22px 26px;
+      max-width: 320px;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.35);
+    }
+    .map-card-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 8px;
+    }
+    .map-card h4 {
+      font-size: 18px;
+      font-weight: 800;
+      margin-bottom: 6px;
+      letter-spacing: -0.01em;
+    }
+    .map-card p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+    .map-card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #fff;
+      border-bottom: 1px solid rgba(255,255,255,0.3);
+      padding-bottom: 2px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .map-card-link:hover { color: var(--red); border-color: var(--red); }
+    @media (max-width: 640px) {
+      .map-frame { height: 380px; }
+      .map-card { left: 12px; right: 12px; top: 12px; max-width: none; padding: 18px 20px; }
+    }
+
+    /* ─── FOOTER ─── */
+    .footer {
+      background: var(--dark);
+      padding: 32px 0;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .footer-logo {
+      font-size: 17px;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.02em;
+    }
+    .footer-logo span { color: var(--red); }
+    .footer-meta {
+      font-size: 13px;
+      color: rgba(255,255,255,0.3);
+      font-weight: 500;
+    }
+    .footer-policy {
+      font-size: 13px;
+      color: rgba(255,255,255,0.3);
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .footer-policy:hover { color: rgba(255,255,255,0.6); }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 1024px) {
+      .why-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+      .hero-photo {
+        max-width: 420px;
+        margin: 0 auto;
+        aspect-ratio: 4/3;
+      }
+      .hero-reviews-badge { display: none; }
+      .hero-photo-badge { display: none; }
+      .calc-inner { grid-template-columns: 1fr; gap: 40px; }
+      .contacts-grid { grid-template-columns: 1fr; gap: 48px; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+
+      .hero { padding: 56px 0 72px; }
+      .hero h1 { font-size: 36px; }
+      .hero-sub { font-size: 15px; }
+      .hero-stats { gap: 20px; }
+      .hero-stat-number { font-size: 24px; }
+
+      .services-grid { grid-template-columns: 1fr; }
+      .service-card { padding: 32px 24px; }
+
+      .portfolio-grid { grid-template-columns: 1fr 1fr; }
+
+      .why-grid { grid-template-columns: 1fr 1fr; }
+
+      .reviews-grid { grid-template-columns: 1fr; }
+
+      .socials-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 520px) {
+      .portfolio-grid { grid-template-columns: 1fr; }
+      .why-grid { grid-template-columns: 1fr; }
+      .hero-stats { flex-direction: column; gap: 16px; }
+      .hero-stat-divider { display: none; }
+      .calc-phone-wrap { flex-direction: column; }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ── Scroll Progress ── -->
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- ═══════════════════════ NAV ═══════════════════════ -->
+<header class="nav" id="nav">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">РЕМОНТ<span>БЕРУ</span></a>
+      <nav class="nav-links">
+        <a href="#services">Услуги</a>
+        <a href="#portfolio">Портфолио</a>
+        <a href="#reviews">Отзывы</a>
+        <a href="#contacts">Контакты</a>
+      </nav>
+      <a href="https://wa.me/79219476521" class="nav-cta" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.113.548 4.099 1.508 5.833L.016 23.41a.5.5 0 0 0 .61.613l5.661-1.475A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.907 0-3.694-.504-5.24-1.38l-.372-.217-3.896 1.014.992-3.793-.238-.384A9.944 9.944 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+        WhatsApp
+      </a>
+      <button class="hamburger" id="hamburger" aria-label="Меню">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#services" onclick="closeMenu()">Услуги</a>
+    <a href="#portfolio" onclick="closeMenu()">Портфолио</a>
+    <a href="#reviews" onclick="closeMenu()">Отзывы</a>
+    <a href="#contacts" onclick="closeMenu()">Контакты</a>
+    <a href="https://wa.me/79219476521" class="mobile-cta" target="_blank" rel="noopener">Написать в WhatsApp</a>
+  </div>
+</header>
+
+<!-- ═══════════════════════ HERO ═══════════════════════ -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-content">
+        <div class="hero-eyebrow reveal">Санкт-Петербург · с 2014 года</div>
+        <h1 class="reveal reveal-delay-1">Ремонт и строительство под ключ — <em>я отвечаю лично</em></h1>
+        <p class="hero-sub reveal reveal-delay-2">
+          <strong>Дмитрий Слушник.</strong> Более 10 лет на рынке. Фиксированная смета. Управление объектом удалённо — вы можете находиться в любой точке мира.
+        </p>
+        <div class="hero-actions reveal reveal-delay-3">
+          <a href="#calculator" class="btn-primary">Рассчитать стоимость</a>
+          <a href="#portfolio" class="btn-outline">Смотреть работы</a>
+        </div>
+        <div class="hero-stats reveal reveal-delay-4">
+          <div class="hero-stat">
+            <div class="hero-stat-number" data-counter="10" data-suffix="+">10+</div>
+            <div class="hero-stat-label">лет опыта</div>
+          </div>
+          <div class="hero-stat-divider"></div>
+          <div class="hero-stat">
+            <div class="hero-stat-number" data-counter="150" data-suffix="+">150+</div>
+            <div class="hero-stat-label">объектов</div>
+          </div>
+          <div class="hero-stat-divider"></div>
+          <div class="hero-stat">
+            <div class="hero-stat-number" data-counter="38000">38&nbsp;000</div>
+            <div class="hero-stat-label">подписчиков</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-image-wrap reveal reveal-delay-2">
+        <div class="hero-photo" id="heroPhoto">
+          <img src="https://picsum.photos/seed/dmitry-slushnik-portrait/420/560" alt="Дмитрий Слушник, основатель Ремонт Беру" loading="eager" id="heroImg">
+          <div class="hero-photo-badge">
+            <strong>Дмитрий Слушник</strong>
+            <span>Основатель · РЕМОНТ БЕРУ</span>
+          </div>
+        </div>
+        <div class="hero-reviews-badge">
+          <div class="stars">★★★★★</div>
+          <div class="label">Яндекс.Карты</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ TRUST TICKER ═══════════════════════ -->
+<div class="trust-strip">
+  <div class="marquee-wrapper">
+    <div class="marquee-track" id="marqueeTrack">
+      <!-- Set 1 -->
+      <div class="marquee-item">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        <span>Санкт-Петербург и область</span>
+      </div>
+      <div class="marquee-dot"></div>
+      <div class="marquee-item"><strong>150+</strong>&nbsp;объектов сдано</div>
+      <div class="marquee-dot"></div>
+      <div class="marquee-item">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        <span><strong>38 000</strong>&nbsp;подписчиков</span>
+      </div>
+      <div class="marquee-dot"></div>
+      <div class="marquee-item">Фиксированная смета — цена не меняется</div>
+      <div class="marquee-dot"></div>
+      <div class="marquee-item">Ремонт <strong>до 40 000 ₽/м²</strong></div>
+      <div class="marquee-dot"></div>
+      <div class="marquee-item">Дом за <strong>8 месяцев</strong> по договору</div>
+      <div class="marquee-dot"></div>
+      <div class="marquee-item">Управление удалённо — ключи Сдэком</div>
+      <div class="marquee-dot"></div>
+      <div class="marquee-item">Договор ИП на ИП · Официальная оплата</div>
+      <div class="marquee-dot"></div>
+      <div class="marquee-item">Instagram @remont.beru · Telegram @DimashBlog</div>
+      <div class="marquee-dot"></div>
+      <!-- Set 2 (duplicate for seamless loop) -->
+      <div class="marquee-item">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        <span>Санкт-Петербург и область</span>
+      </div>
+      <div class="marquee-dot"></div>
+      <div class="marquee-item"><strong>150+</strong>&nbsp;объектов сдано</div>
+      <div class="marquee-dot"></div>
+      <div class="marquee-item">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        <span><strong>38 000</strong>&nbsp;подписчиков</span>
+      </div>
+      <div class="marquee-dot"></div>
+      <div class="marquee-item">Фиксированная смета — цена не меняется</div>
+      <div class="marquee-dot"></div>
+      <div class="marquee-item">Ремонт <strong>до 40 000 ₽/м²</strong></div>
+      <div class="marquee-dot"></div>
+      <div class="marquee-item">Дом за <strong>8 месяцев</strong> по договору</div>
+      <div class="marquee-dot"></div>
+      <div class="marquee-item">Управление удалённо — ключи Сдэком</div>
+      <div class="marquee-dot"></div>
+      <div class="marquee-item">Договор ИП на ИП · Официальная оплата</div>
+      <div class="marquee-dot"></div>
+      <div class="marquee-item">Instagram @remont.beru · Telegram @DimashBlog</div>
+      <div class="marquee-dot"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════ SERVICES ═══════════════════════ -->
+<section class="services" id="services">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-eyebrow">Направления</div>
+      <h2>Что я делаю</h2>
+      <p>Два направления, два отдельных продукта. Разный масштаб — одинаковый подход к качеству.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <h3>Ремонт квартир и домов</h3>
+        <p>Комплексный ремонт под ключ. Дмитрий лично контролирует каждый этап. Вы можете находиться в любой точке мира — фото и видео с объекта ежедневно.</p>
+        <ul class="service-list">
+          <li>Квартиры в новостройках</li>
+          <li>Вторичное жильё</li>
+          <li>Загородные дома</li>
+          <li>Коммерческие помещения</li>
+          <li>Приёмка квартир</li>
+        </ul>
+        <div class="service-price">от 15 000 <span>₽/м²</span></div>
+        <a href="#calculator" class="btn-primary" style="align-self: flex-start;">Рассчитать стоимость</a>
+      </div>
+
+      <div class="service-card reveal reveal-delay-2">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><path d="M7 8h2M11 8h2M15 8h2M7 12h2M11 12h2M15 12h2"/></svg>
+        </div>
+        <h3>Строительство домов</h3>
+        <p>Строительство домов из газобетона до 3 этажей. Фиксированная смета без скрытых доплат. Сдача под ключ за 8 месяцев по договору.</p>
+        <ul class="service-list">
+          <li>Фундамент</li>
+          <li>Кровля</li>
+          <li>Внешняя отделка</li>
+          <li>Внутренняя отделка</li>
+          <li>Инженерные системы</li>
+        </ul>
+        <div class="service-price">от 25 000 <span>₽/м²</span></div>
+        <a href="https://wa.me/79219476521" class="btn-primary" style="align-self: flex-start;" target="_blank" rel="noopener">Обсудить проект</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ WHY DMITRY ═══════════════════════ -->
+<section class="why-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-eyebrow" style="color: var(--red);">Почему Дмитрий</div>
+      <h2>Вы всегда знаете, кто отвечает за ваш объект</h2>
+      <p>Не менеджер и не прораб. Дмитрий лично.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card reveal">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.36a2 2 0 0 1 1.99-2.18H6.6a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
+        <h4>Личный номер</h4>
+        <p>Дмитрий доступен лично в любое время. Не колл-центр, не помощник — сразу к делу.</p>
+      </div>
+      <div class="why-card reveal reveal-delay-1">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </div>
+        <h4>Управление удалённо</h4>
+        <p>Полный контроль через фото и видео. Клиенты находятся в Москве, за границей — и получают ключи через Сдэком.</p>
+      </div>
+      <div class="why-card reveal reveal-delay-2">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        </div>
+        <h4>Фиксированная смета</h4>
+        <p>Цена не меняется после подписания договора. Никаких "мы не учли" и "докупить нужно".</p>
+      </div>
+      <div class="why-card reveal reveal-delay-3">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+        </div>
+        <h4>Договор ИП на ИП</h4>
+        <p>Официальное оформление. Работа по договору, оплата с расчётного счёта — можно принять к расходам.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ PORTFOLIO ═══════════════════════ -->
+<section class="portfolio" id="portfolio">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-eyebrow">Реализованные проекты</div>
+      <h2>Наши работы</h2>
+      <p>Реальные объекты с реальными ценами и сроками.</p>
+    </div>
+    <div class="portfolio-grid">
+      <div class="portfolio-card reveal">
+        <div class="portfolio-img">
+          <img src="https://picsum.photos/seed/apartment-primorsky-spb/800/600" alt="Квартира 68м², Приморский р-н" loading="lazy">
+          <div class="portfolio-hover-label">Подробнее</div>
+        </div>
+        <div class="portfolio-info">
+          <span class="portfolio-tag">Ремонт квартиры</span>
+          <h4>Квартира 68 м², Приморский р-н</h4>
+          <p class="portfolio-meta">Срок: 3,5 месяца &nbsp;·&nbsp; Ремонт под ключ</p>
+        </div>
+      </div>
+      <div class="portfolio-card reveal reveal-delay-1">
+        <div class="portfolio-img">
+          <img src="https://picsum.photos/seed/house-vsevolozhsk-gazobeton/800/600" alt="Дом 180м², Всеволожск" loading="lazy">
+          <div class="portfolio-hover-label">Подробнее</div>
+        </div>
+        <div class="portfolio-info">
+          <span class="portfolio-tag">Строительство дома</span>
+          <h4>Дом 180 м², Всеволожск</h4>
+          <p class="portfolio-meta">Срок: 7 месяцев &nbsp;·&nbsp; Газобетон, под ключ</p>
+        </div>
+      </div>
+      <div class="portfolio-card reveal reveal-delay-2">
+        <div class="portfolio-img">
+          <img src="https://picsum.photos/seed/premium-apartment-spb-interior/800/600" alt="Квартира 52м², Петроградская сторона" loading="lazy">
+          <div class="portfolio-hover-label">Подробнее</div>
+        </div>
+        <div class="portfolio-info">
+          <span class="portfolio-tag">Ремонт квартиры</span>
+          <h4>Квартира 52 м², Петроградская сторона</h4>
+          <p class="portfolio-meta">Срок: 2,5 месяца &nbsp;·&nbsp; Премиум ремонт</p>
+        </div>
+      </div>
+      <div class="portfolio-card reveal">
+        <div class="portfolio-img">
+          <img src="https://picsum.photos/seed/bathroom-renovation-modern/800/600" alt="Ванная комната, ЖК Северный" loading="lazy">
+          <div class="portfolio-hover-label">Подробнее</div>
+        </div>
+        <div class="portfolio-info">
+          <span class="portfolio-tag">Ванная комната</span>
+          <h4>Ванная 9 м², ЖК "Северный"</h4>
+          <p class="portfolio-meta">Срок: 3 недели &nbsp;·&nbsp; Отделка под ключ</p>
+        </div>
+      </div>
+      <div class="portfolio-card reveal reveal-delay-1">
+        <div class="portfolio-img">
+          <img src="https://picsum.photos/seed/commercial-renovation-office/800/600" alt="Коммерческое помещение 120м²" loading="lazy">
+          <div class="portfolio-hover-label">Подробнее</div>
+        </div>
+        <div class="portfolio-info">
+          <span class="portfolio-tag">Коммерция</span>
+          <h4>Офис 120 м², Центральный р-н</h4>
+          <p class="portfolio-meta">Срок: 6 недель &nbsp;·&nbsp; Ремонт под ключ</p>
+        </div>
+      </div>
+      <div class="portfolio-card reveal reveal-delay-2">
+        <div class="portfolio-img">
+          <img src="https://picsum.photos/seed/house-kudrovo-lenoblast/800/600" alt="Дом 240м², Кудрово" loading="lazy">
+          <div class="portfolio-hover-label">Подробнее</div>
+        </div>
+        <div class="portfolio-info">
+          <span class="portfolio-tag">Строительство дома</span>
+          <h4>Дом 240 м², Кудрово</h4>
+          <p class="portfolio-meta">Срок: 8 месяцев &nbsp;·&nbsp; Газобетон, под ключ</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ REVIEWS ═══════════════════════ -->
+<section class="reviews" id="reviews">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-eyebrow" style="color: var(--red);">Отзывы</div>
+      <h2>Что говорят клиенты</h2>
+      <p>Реальные отзывы с Яндекс.Карт.</p>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card reveal">
+        <div class="review-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <p class="review-text">"Я был за границей и всю работу по снабжению материалов и работу подрядчиков Дмитрий взял на себя. Очень удобно работать так, как я платил с ИП на ИП. Работа была сделана качественно и в срок."</p>
+        <div class="review-author">
+          <span class="review-name">Клиент из Яндекс.Карт</span>
+          <span class="review-source">Яндекс.Карты, подтверждённый отзыв</span>
+        </div>
+      </div>
+      <div class="review-card reveal reveal-delay-1">
+        <div class="review-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <p class="review-text">"Стоимость 40 000 за метр квадратный под ключ. Делали по договору. Я был в Москве, Дмитрий управлял всеми делами. Ключи передал Сдэком. Увиделись на приёмке квартиры. Качественно сделано ВСЁ."</p>
+        <div class="review-author">
+          <span class="review-name">Клиент из Яндекс.Карт</span>
+          <span class="review-source">Яндекс.Карты, подтверждённый отзыв</span>
+        </div>
+      </div>
+      <div class="review-card reveal reveal-delay-2">
+        <div class="review-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <p class="review-text">"Не в одной строительной фирме я не видел, чтобы начальник так скрупулёзно относился к каждой мелочи. Дмитрий лично следит за каждым проектом. В любое время можно позвонить ему на личный номер телефона."</p>
+        <div class="review-author">
+          <span class="review-name">Клиент из Яндекс.Карт</span>
+          <span class="review-source">Яндекс.Карты, подтверждённый отзыв</span>
+        </div>
+      </div>
+    </div>
+    <div class="reviews-cta reveal">
+      <a href="https://yandex.ru/maps/org/remont_beru" class="btn-outline-white" target="_blank" rel="noopener">Читать все отзывы на Яндекс.Картах</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ CALCULATOR ═══════════════════════ -->
+<section class="calculator" id="calculator">
+  <div class="container">
+    <div class="calc-inner">
+      <div class="calc-left reveal">
+        <h2>Рассчитайте стоимость за 30 секунд</h2>
+        <p>Укажите параметры объекта и получите предварительную смету. Точную стоимость уточним на замере — бесплатно.</p>
+      </div>
+      <div class="calc-form reveal reveal-delay-2">
+        <div class="calc-field">
+          <label>Тип объекта</label>
+          <div class="calc-options">
+            <button class="calc-option active" data-type="flat" onclick="setType(this)">Квартира</button>
+            <button class="calc-option" data-type="house" onclick="setType(this)">Дом</button>
+            <button class="calc-option" data-type="commerce" onclick="setType(this)">Коммерция</button>
+          </div>
+        </div>
+        <div class="calc-field">
+          <label>Площадь</label>
+          <div class="calc-slider-wrap">
+            <div class="calc-slider-value" id="areaDisplay">60 <span>м²</span></div>
+            <input type="range" id="areaSlider" min="20" max="500" value="60" step="5" oninput="updateCalc()">
+          </div>
+        </div>
+        <div class="calc-field">
+          <label>Уровень ремонта</label>
+          <div class="calc-options">
+            <button class="calc-option active" data-level="standard" onclick="setLevel(this)">Стандарт</button>
+            <button class="calc-option" data-level="comfort" onclick="setLevel(this)">Комфорт</button>
+            <button class="calc-option" data-level="premium" onclick="setLevel(this)">Премиум</button>
+          </div>
+        </div>
+        <div class="calc-result">
+          <div class="calc-result-label">Ориентировочная стоимость</div>
+          <div class="calc-result-value" id="calcResult">от 900 000 ₽</div>
+        </div>
+        <div class="calc-field">
+          <label>Ваш телефон</label>
+          <div class="calc-phone-wrap">
+            <input type="tel" class="calc-input" id="calcPhone" placeholder="+7 (___) ___-__-__">
+            <button class="btn-calc-submit" onclick="submitCalc()">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.113.548 4.099 1.508 5.833L.016 23.41a.5.5 0 0 0 .61.613l5.661-1.475A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.907 0-3.694-.504-5.24-1.38l-.372-.217-3.896 1.014.992-3.793-.238-.384A9.944 9.944 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+              В WhatsApp
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ CONTACTS ═══════════════════════ -->
+<section class="contacts" id="contacts">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-eyebrow">Связаться</div>
+      <h2>Контакты</h2>
+      <p>Дмитрий отвечает лично.</p>
+    </div>
+    <div class="contacts-grid">
+      <div class="contacts-left reveal">
+        <h3>Дмитрий Слушник</h3>
+        <div class="contacts-item">
+          <div class="contacts-item-icon">
+            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.36a2 2 0 0 1 1.99-2.18H6.6a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <div class="contacts-item-text">
+            <span class="contacts-item-label">Телефон</span>
+            <div class="contacts-item-value"><a href="tel:+79219476521">+7 (921) 947-65-21</a></div>
+          </div>
+        </div>
+        <div class="contacts-item">
+          <div class="contacts-item-icon">
+            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div class="contacts-item-text">
+            <span class="contacts-item-label">Email</span>
+            <div class="contacts-item-value"><a href="mailto:Zakup900@yandex.ru">Zakup900@yandex.ru</a></div>
+          </div>
+        </div>
+        <div class="contacts-item">
+          <div class="contacts-item-icon">
+            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div class="contacts-item-text">
+            <span class="contacts-item-label">Офис</span>
+            <div class="contacts-item-value">ул. Полевая Сабировская, 46А, офис 315, СПб</div>
+          </div>
+        </div>
+        <a href="https://wa.me/79219476521" class="contacts-wa-btn" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.113.548 4.099 1.508 5.833L.016 23.41a.5.5 0 0 0 .61.613l5.661-1.475A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.907 0-3.694-.504-5.24-1.38l-.372-.217-3.896 1.014.992-3.793-.238-.384A9.944 9.944 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+          Написать сейчас
+        </a>
+      </div>
+
+      <div class="contacts-right reveal reveal-delay-2">
+        <h4>Соцсети</h4>
+        <div class="socials-grid">
+          <a href="https://www.instagram.com/remont.beru" class="social-link" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="#E1306C" width="20" height="20"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            <span>@remont.beru</span>
+          </a>
+          <a href="https://www.instagram.com/dom300stroit" class="social-link" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="#E1306C" width="20" height="20"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            <span>@dom300stroit</span>
+          </a>
+          <a href="https://www.youtube.com/@remontberu" class="social-link" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="#FF0000" width="20" height="20"><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
+            <span>YouTube</span>
+          </a>
+          <a href="https://t.me/DimashBlog" class="social-link" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="#2CA5E0" width="20" height="20"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+            <span>Telegram</span>
+          </a>
+          <a href="https://vk.com/remont.beru" class="social-link" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="#4C75A3" width="20" height="20"><path d="M15.684 0H8.316C1.592 0 0 1.592 0 8.316v7.368C0 22.408 1.592 24 8.316 24h7.368C22.408 24 24 22.408 24 15.684V8.316C24 1.592 22.391 0 15.684 0zm3.692 17.123h-1.744c-.66 0-.862-.523-2.049-1.713-1.033-1.01-1.49-.9-1.49.604v1.562c0 .394-.125.618-1.152.618-1.71 0-3.607-.104-4.948-2.486C6.52 12.895 5.5 9.5 5.5 9.5s-.062-.165.054-.262c.116-.097.41-.097.41-.097h1.764c.286 0 .398.171.483.38 0 0 .91 2.557 2.174 4.285.567.79.835.927.986.927.152 0 .265-.097.265-.097V9.5s-.014-.524-.55-.524H9.6s-.207 0-.207-.165c0-.165.207-.165.207-.165s.62-.077 1.488-.077h3.117c.41 0 .453.19.453.48v3.752s.152.118.32.118c.15 0 .38-.105.76-.618.845-1.063 1.52-2.848 1.52-2.848s.11-.272.39-.272h1.764c.524 0 .654.262.524.618-.248.847-1.61 3.116-1.61 3.116-.14.227-.19.34 0 .563.14.165 1.28 1.143 1.93 1.91.48.57.766 1.15.766 1.15.175.358-.014.535-.483.535z"/></svg>
+            <span>VK</span>
+          </a>
+          <a href="https://dzen.ru/remontberu" class="social-link" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="#1F1F1F" width="20" height="20"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 1.5c5.799 0 10.5 4.701 10.5 10.5S17.799 22.5 12 22.5 1.5 17.799 1.5 12 6.201 1.5 12 1.5zm-.04 3.75c-.008 2.955-1.36 5.572-3.56 7.28C10.57 14.23 11.96 16.665 12 19.5c.04-2.835 1.43-5.27 3.6-6.97-2.2-1.708-3.55-4.325-3.56-7.28H11.96z"/></svg>
+            <span>Дзен</span>
+          </a>
+        </div>
+        <div class="contacts-hours">
+          <h5>Время работы</h5>
+          <div class="hours-row">
+            <span class="hours-day">Пн — Пт</span>
+            <span class="hours-time">9:00 — 20:00</span>
+          </div>
+          <div class="hours-row">
+            <span class="hours-day">Суббота</span>
+            <span class="hours-time">10:00 — 18:00</span>
+          </div>
+          <div class="hours-row">
+            <span class="hours-day">Воскресенье</span>
+            <span class="hours-time">10:00 — 17:00</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ MAP ═══════════════════════ -->
+<section class="map-section" id="map">
+  <div class="container">
+    <div class="map-frame reveal">
+      <div class="map-card">
+        <div class="map-card-eyebrow">Офис</div>
+        <h4>Ремонт Беру</h4>
+        <p>ул. Полевая Сабировская, 46А, офис 315, Санкт-Петербург</p>
+        <a href="https://yandex.ru/maps/?pt=30.274003,59.995302&z=16&l=map" class="map-card-link" target="_blank" rel="noopener">
+          Открыть в Яндекс.Картах
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H8M17 7v9"/></svg>
+        </a>
+      </div>
+      <iframe
+        src="https://yandex.ru/map-widget/v1/?ll=30.274003%2C59.995302&z=16&pt=30.274003,59.995302,pm2rdl"
+        loading="lazy"
+        allowfullscreen="true"
+        title="Ремонт Беру на карте"></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ FOOTER ═══════════════════════ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-logo">РЕМОНТ<span>БЕРУ</span></div>
+      <div class="footer-meta">© 2026 РЕМОНТ БЕРУ &nbsp;|&nbsp; ИП Слушник Д.В. &nbsp;|&nbsp; ОГРНИП 320784700187272</div>
+      <a href="#" class="footer-policy">Политика конфиденциальности</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ─── Scroll Progress Bar ───
+  const progressBar = document.getElementById('scrollProgress');
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    progressBar.style.width = pct + '%';
+  }, { passive: true });
+
+  // ─── Navbar shadow on scroll ───
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 10);
+  }, { passive: true });
+
+  // ─── Hamburger menu ───
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+  });
+  function closeMenu() {
+    hamburger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+  }
+
+  // ─── Animated Counter ───
+  function animateCounter(el, target, suffix, duration) {
+    duration = duration || 1800;
+    const start = performance.now();
+    const update = (time) => {
+      const progress = Math.min((time - start) / duration, 1);
+      // easeOutQuart
+      const ease = 1 - Math.pow(1 - progress, 4);
+      const val = Math.round(ease * target);
+      el.textContent = val.toLocaleString('ru-RU') + (suffix || '');
+      if (progress < 1) requestAnimationFrame(update);
+    };
+    requestAnimationFrame(update);
+  }
+
+  let countersStarted = false;
+  function startCounters() {
+    if (countersStarted) return;
+    countersStarted = true;
+    document.querySelectorAll('[data-counter]').forEach(el => {
+      const target = parseInt(el.dataset.counter, 10);
+      const suffix = el.dataset.suffix || '';
+      animateCounter(el, target, suffix);
+    });
+  }
+
+  // ─── Scroll Reveal + Counter trigger ───
+  const revealEls = document.querySelectorAll('.reveal');
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        // If this is the hero stats, start counters
+        if (entry.target.closest('.hero-content')) {
+          setTimeout(startCounters, 400);
+        }
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  revealEls.forEach(el => revealObserver.observe(el));
+
+  // ─── 3D Card Tilt Effect ───
+  function addTilt(selector, intensity) {
+    intensity = intensity || 6;
+    document.querySelectorAll(selector).forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        card.style.transform = `perspective(700px) rotateY(${x * intensity}deg) rotateX(${-y * intensity}deg) translateY(-6px)`;
+        card.style.transition = 'box-shadow 0.2s';
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = '';
+        card.style.transition = 'transform 0.55s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s';
+      });
+    });
+  }
+
+  addTilt('.service-card', 5);
+  addTilt('.why-card', 6);
+  addTilt('.review-card', 4);
+
+  // ─── Parallax Hero Photo ───
+  const heroImg = document.getElementById('heroImg');
+  if (heroImg) {
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      const maxScroll = 600;
+      if (scrollY < maxScroll) {
+        const offset = scrollY * 0.18;
+        heroImg.style.transform = `translateY(${offset}px) scale(1.04)`;
+      }
+    }, { passive: true });
+  }
+
+  // ─── Calculator ───
+  let currentType = 'flat';
+  let currentLevel = 'standard';
+  const rates = { standard: 15000, comfort: 25000, premium: 40000 };
+
+  function setType(btn) {
+    document.querySelectorAll('[data-type]').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentType = btn.dataset.type;
+    updateCalc();
+  }
+
+  function setLevel(btn) {
+    document.querySelectorAll('[data-level]').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentLevel = btn.dataset.level;
+    updateCalc();
+  }
+
+  function updateCalc() {
+    const area = parseInt(document.getElementById('areaSlider').value);
+    document.getElementById('areaDisplay').innerHTML = area + ' <span>м²</span>';
+    const rate = rates[currentLevel];
+    const min = (area * rate * 0.9).toLocaleString('ru-RU');
+    document.getElementById('calcResult').textContent = 'от ' + min + ' ₽';
+  }
+
+  function submitCalc() {
+    const phone = document.getElementById('calcPhone').value.trim();
+    const area = document.getElementById('areaSlider').value;
+    const level = currentLevel;
+    const type = currentType;
+    const result = document.getElementById('calcResult').textContent;
+    const msg = encodeURIComponent(
+      'Здравствуйте! Я рассчитал стоимость через калькулятор на сайте:\n' +
+      'Тип: ' + type + '\nПлощадь: ' + area + ' м²\nУровень: ' + level +
+      '\nОриентировочная стоимость: ' + result +
+      (phone ? '\nМой телефон: ' + phone : '')
+    );
+    window.open('https://wa.me/79219476521?text=' + msg, '_blank');
+  }
+
+  // Init calc
+  updateCalc();
+</script>
+
+</body>
+</html>
